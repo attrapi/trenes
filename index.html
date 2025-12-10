@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rutas ferroviarias</title>
+  <style>
+    :root {
+      /* Color institucional base */
+      --color-base: #691C32;
+      --color-base-dark: #3e111f;
+      --color-base-light: #8c2745;
+      --color-texto: #f9fafb;
+      --color-borde: #facc15;  /* acento amarillo suave */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* sin scroll vertical ni horizontal */
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--color-base-dark);
+      color: var(--color-texto);
+    }
+
+    .page {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* BANNER: contenedor flex para centrar la imagen */
+    .banner {
+      flex: 1 1 auto;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;  /* centra horizontal */
+      align-items: center;      /* centra vertical */
+    }
+
+    .banner img {
+      width: 50%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.25),
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.4)
+      );
+      pointer-events: none;
+    }
+
+    /* Franja de botones */
+    .routes {
+      flex: 0 0 auto;
+      padding: 1rem 1.5rem;
+      background: linear-gradient(
+        to right,
+        var(--color-base-dark),
+        var(--color-base)
+      );
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 4vh; /* sube los botones un poco */
+      position: relative;
+      z-index: 2;
+    }
+
+    .routes-inner {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .route-btn {
+      flex: 1 1 0;
+      max-width: 360px;
+      padding: 0.9rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--color-borde);
+      color: var(--color-texto);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        filter 0.18s ease-out;
+      white-space: nowrap;
+      background: linear-gradient(135deg, var(--color-base-light), var(--color-base));
+      text-decoration: none;   /* que no se vea como link normal */
+    }
+
+    .route-btn.saltillo {
+      background: linear-gradient(135deg, var(--color-base), var(--color-base-dark));
+    }
+
+    .route-btn span.bullet {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 2px solid #e5e7eb;
+    }
+
+    .route-btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      filter: brightness(1.05);
+    }
+
+    .route-btn:active {
+      transform: translateY(0) scale(0.99);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      filter: brightness(0.98);
+    }
+
+    /* Responsive para pantallas chicas */
+    @media (max-width: 640px) {
+      .routes {
+        padding: 0.8rem 1rem;
+        margin-bottom: 3vh;
+      }
+
+      .routes-inner {
+        flex-direction: column;
+      }
+
+      .banner img {
+        width: 70%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- BANNER: cambia la ruta de la imagen -->
+    <div class="banner">
+      <img src="./mapa-tren.png" alt="Mapa ferroviario" />
+    </div>
+
+    <!-- BOTONES DE RUTAS (ENLACES) -->
+    <div class="routes">
+      <div class="routes-inner">
+        <a
+          class="route-btn queretaro"
+          href="https://attrapi.github.io/lineadeltiempo-queretaro-irapuato/"
+          target="_blank"
+        >
+          <span class="bullet"></span>
+          <span>Tren Querétaro - Irapuato</span>
+        </a>
+
+        <a
+          class="route-btn saltillo"
+          href="https://attrapi.github.io/lineadeltiempo-saltillo-nuevolaredo/"
+          target="_blank"
+        >
+          <span class="bullet"></span>
+          <span>Tren Saltillo - Nuevo Laredo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
