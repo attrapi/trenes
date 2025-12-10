@@ -79,7 +79,7 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin-bottom: 4vh; /* sube los botones un poco */
+      margin-bottom: 4vh; /* desktop: un poco arriba del borde */
       position: relative;
       z-index: 2;
     }
@@ -145,18 +145,18 @@
     /* ================== Responsive para pantallas chicas ================== */
     @media (max-width: 640px) {
       .banner {
-        padding-top: 0.5rem;
+        padding-top: 0.3rem;
         padding-bottom: 0.3rem;
       }
 
       .banner img {
-        width: 85%;   /* mapa más grande en celular */
-        max-width: 480px;
+        width: 80%;   /* mapa un poco más chico para darle espacio a botones */
+        max-width: 420px;
       }
 
       .routes {
-        padding: 0.5rem 1rem 1rem;
-        margin-bottom: 2vh;
+        padding: 0.5rem 1rem 0.8rem;
+        margin-bottom: 14vh;  /* SUBE MUCHO LOS BOTONES EN CELULAR */
       }
 
       .routes-inner {
@@ -166,7 +166,7 @@
       .route-btn {
         max-width: none;
         font-size: 0.85rem;
-        padding: 0.75rem 1rem;
+        padding: 0.7rem 1rem;
       }
     }
   </style>
