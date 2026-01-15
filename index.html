@@ -9,20 +9,16 @@
   <style>
     :root {
       --fondo-vino: #691c32;
-      --gris-claro: #e5e5e5;
       --gris-badge: #9b8f95;
       --texto-claro: #ffffff;
       --amarillo-link: #facc6b;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--fondo-vino);
       color: var(--texto-claro);
     }
@@ -32,7 +28,9 @@
       min-height: 100vh;
     }
 
-    /* Columna izquierda: mapa */
+    /* ======================
+       Columna izquierda: mapa
+       ====================== */
     .col-izq {
       flex: 1.1;
       display: flex;
@@ -41,14 +39,73 @@
       padding: 2rem;
     }
 
+    .mapa-wrap{
+      width: 100%;
+      max-width: 980px; /* ajusta si quieres más grande */
+    }
+
     .col-izq img {
-      max-width: 100%;
+      display: block;
+      width: 100%;
       height: auto;
-      border-radius: 8px;
+      border-radius: 12px;
       box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
     }
 
-    /* Columna derecha: texto y fases */
+    /* ✅ BOTONES ABAJO de la imagen */
+    .map-buttons{
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .map-btn{
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(0,0,0,.22);
+      color: #fff;
+
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.22);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select: none;
+    }
+
+    .map-btn:hover{
+      transform: translateY(-1px);
+      background: rgba(0,0,0,.32);
+      border-color: rgba(255,255,255,.55);
+    }
+
+    .map-btn:active{
+      transform: translateY(0) scale(.99);
+    }
+
+    .map-btn:focus-visible{
+      outline: 2px solid rgba(250,204,107,.95);
+      outline-offset: 3px;
+    }
+
+    .map-btn--sec{
+      background: rgba(255,255,255,.10);
+    }
+
+    /* =========================
+       Columna derecha: texto/fases
+       ========================= */
     .col-der {
       flex: 1;
       padding: 3rem 4rem;
@@ -79,7 +136,6 @@
       backdrop-filter: blur(4px);
     }
 
-    /* Botón que abre/cierra cada fase */
     .fase-boton {
       width: 100%;
       border: none;
@@ -89,11 +145,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.6rem 1rem;
-      background: linear-gradient(
-        135deg,
-        var(--gris-badge),
-        #b6a9b0
-      );
+      background: linear-gradient(135deg, var(--gris-badge), #b6a9b0);
       color: #fff;
       font-weight: 600;
       font-size: 0.95rem;
@@ -101,9 +153,7 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     }
 
-    .fase-titulo {
-      pointer-events: none;
-    }
+    .fase-titulo { pointer-events: none; }
 
     .fase-icono {
       font-size: 1.2rem;
@@ -111,17 +161,13 @@
       pointer-events: none;
     }
 
-    /* Contenedor colapsable */
     .fase-contenido {
       padding: 0 1.2rem 0;
       max-height: 0;
       opacity: 0;
       overflow: hidden;
       transform: translateY(-4px);
-      transition:
-        max-height 0.45s ease,
-        opacity 0.35s ease,
-        transform 0.35s ease;
+      transition: max-height 0.45s ease, opacity 0.35s ease, transform 0.35s ease;
     }
 
     .fase-contenido ul {
@@ -135,7 +181,6 @@
       font-size: 0.98rem;
     }
 
-    /* Links de tramos con enlace */
     .tramo-link {
       color: var(--amarillo-link);
       text-decoration: none;
@@ -159,55 +204,50 @@
       opacity: 0.95;
     }
 
-    /* Estado abierta */
     .fase.abierta .fase-contenido {
-      max-height: 260px; /* suficiente para el contenido */
+      max-height: 260px;
       opacity: 1;
       transform: translateY(0);
     }
 
-    .fase.abierta .fase-icono {
-      transform: rotate(90deg);
-    }
+    .fase.abierta .fase-icono { transform: rotate(90deg); }
 
-    /* RESPONSIVO */
+    /* ===== Responsive ===== */
     @media (max-width: 960px) {
-      .layout {
-        flex-direction: column;
-      }
-
-      .col-izq,
-      .col-der {
-        padding: 1.5rem;
-      }
-
-      .col-der {
-        order: -1;
-      }
-
-      h1 {
-        font-size: 2.2rem;
-      }
+      .layout { flex-direction: column; }
+      .col-izq, .col-der { padding: 1.5rem; }
+      .col-der { order: -1; }
+      h1 { font-size: 2.2rem; }
     }
 
     @media (max-width: 600px) {
-      .col-der {
-        padding: 1.2rem;
-      }
-
-      h1 {
-        font-size: 1.9rem;
-      }
+      .col-der { padding: 1.2rem; }
+      h1 { font-size: 1.9rem; }
+      .map-buttons { flex-direction: column; }
+      .map-btn { width: 100%; }
     }
-    
   </style>
 </head>
+
 <body>
   <div class="layout">
-    <!-- IZQUIERDA: ESPACIO PARA TU IMAGEN -->
+    <!-- IZQUIERDA: MAPA + BOTONES ABAJO -->
     <section class="col-izq">
-      <!-- Cambia "mapa-rutas.png" por la ruta de tu imagen -->
-      <img src="mapa-tren.png" alt="Mapa de rutas ferroviarias" />
+      <div class="mapa-wrap">
+        <img src="mapa-tren.png" alt="Mapa de rutas ferroviarias" />
+
+        <!-- ✅ Botones debajo de la imagen (como tus cuadros rojos) -->
+        <div class="map-buttons">
+          <a class="map-btn map-btn--sec" href="#" title="DICCO">DICCO</a>
+
+          <a class="map-btn"
+             href="https://sites.google.com/view/organigramaattrapi/p%C3%A1gina-principal?authuser=1"
+             target="_blank" rel="noopener"
+             title="DPAO">
+            DPAO
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- DERECHA: TÍTULO Y FASES -->
@@ -217,7 +257,7 @@
 
       <!-- FASE 1 -->
       <div class="fase">
-        <button class="fase-boton fase-toggle" aria-expanded="false">
+        <button class="fase-boton fase-toggle" aria-expanded="false" type="button">
           <span class="fase-titulo">Fase 1 – (787 km)</span>
           <span class="fase-icono">▶</span>
         </button>
@@ -225,23 +265,17 @@
           <ul>
             <li>Ciudad de México – Pachuca</li>
             <li>Ciudad de México – Querétaro</li>
-
-            <!-- Estos dos son links -->
             <li>
-              <a
-                class="tramo-link"
-                href="https://attrapi.github.io/lineadeltiempo-queretaro-irapuato/"
-                target="_blank"
-              >
+              <a class="tramo-link"
+                 href="https://attrapi.github.io/lineadeltiempo-queretaro-irapuato/"
+                 target="_blank" rel="noopener">
                 Querétaro – Irapuato
               </a>
             </li>
             <li>
-              <a
-                class="tramo-link"
-                href="https://attrapi.github.io/lineadeltiempo-saltillo-nuevolaredo/"
-                target="_blank"
-              >
+              <a class="tramo-link"
+                 href="https://attrapi.github.io/lineadeltiempo-saltillo-nuevolaredo/"
+                 target="_blank" rel="noopener">
                 Saltillo – Nuevo Laredo
               </a>
             </li>
@@ -251,7 +285,7 @@
 
       <!-- FASE 2 -->
       <div class="fase">
-        <button class="fase-boton fase-toggle" aria-expanded="false">
+        <button class="fase-boton fase-toggle" aria-expanded="false" type="button">
           <span class="fase-titulo">Fase 2 – (1,336 km)</span>
           <span class="fase-icono">▶</span>
         </button>
@@ -268,30 +302,13 @@
   </div>
 
   <script>
-    // Acordeón moderno para las fases
     document.querySelectorAll(".fase-toggle").forEach(function (btn) {
       btn.addEventListener("click", function () {
         const fase = btn.closest(".fase");
         const abierta = fase.classList.toggle("abierta");
         btn.setAttribute("aria-expanded", abierta ? "true" : "false");
-
-        // Para que solo una fase esté abierta a la vez, descomenta:
-        /*
-        if (abierta) {
-          document.querySelectorAll(".fase").forEach(function (otro) {
-            if (otro !== fase) {
-              otro.classList.remove("abierta");
-              const b = otro.querySelector(".fase-toggle");
-              if (b) b.setAttribute("aria-expanded", "false");
-            }
-          });
-        }
-        */
       });
     });
   </script>
 </body>
 </html>
-
-
-
